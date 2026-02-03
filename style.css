@@ -1,0 +1,27 @@
+/*Change 1: Background color and font*/
+body {
+	background-color: #f0fdf4;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px;
+    text-align: center;
+}
+
+/*Change 2: Styling the pet card containers*/
+.pet-card {
+    border: 2px dashed #4ade80;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 15px auto;
+    background-color: white;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
