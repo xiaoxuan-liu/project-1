@@ -1,41 +1,12 @@
 console.log("Script loaded successfully!");
 
-class Animal {
-    constructor(name) {
-        this.name = name;
-        this.energy = 100;
-    }
-    eat() {
-        this.energy += 10;
-        return `${this.name} is eating. Energy: ${this.energy}`;
-    }
-}
-
-class Dog extends Animal {
-    constructor(name, breed) {
-        super(name);
-        this.breed = breed;
-        this.species = 'Dog';
-    }
-    speak() {
-       return "Woof! Woof!";
-    }
-}
-
-class Cat extends Animal {
-    constructor(name) {
-        super(name);
-        this.species = 'Cat';
-        this.isSleeping = false;
-    }
-    speak() {
-        return "Meow~ I am a happy cat.";
-    }
-}
+import Dog from './Dog.js';
+import Cat from './Cat.js';
 
 const nameInput = document.getElementById('petName');
 const displayArea = document.querySelector('#petDisplay');
 const allButtons = document.querySelectorAll('.btn');
+const errorDisplay = document.getElementById('errorOutput');
 
 function createPetCard(petObject) {
     const card = document.createElement('div');
@@ -50,15 +21,38 @@ function createPetCard(petObject) {
 }
 
 document.getElementById('adoptDog').addEventListener('click', function(evt) {
-    console.log("Button clicked:" + evt.target.id);
+    try {
+            const name = nameInput.value.trim(); 
 
-    const name = nameInput.value || 'Buddy';
-    const newDog = new Dog(name, 'Golden Retriever');
-    createPetCard(newDog);
+            if (name === "") {
+                throw new Error("Please enter a name for your dog!");
+            }
+
+            errorDisplay.textContent = ""; 
+            const newDog = new Dog(name, 'Golden Retriever');
+            createPetCard(newDog);
+
+        } catch (err) {
+            errorDisplay.textContent = err.message; 
+            errorDisplay.style.color = "red"; 
+            console.log("Error caught: " + err.message);
+        }
 });
 
 document.getElementById('adoptCat').addEventListener('click', function(evt) {
-    const name = nameInput.value || "Kitty";
-    const newCat = new Cat(name);
-    createPetCard(newCat);
+    try {
+            const name = nameInput.value.trim();
+
+            if (name === "") {
+                throw new Error("The cat needs a name to be adopted!");
+            }
+
+            errorDisplay.textContent = "";
+            const newCat = new Cat(name);
+            createPetCard(newCat);
+
+        } catch (err) {
+            errorDisplay.textContent = err.message;
+            errorDisplay.style.color = "red";
+        }
 });
